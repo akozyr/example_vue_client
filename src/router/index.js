@@ -9,7 +9,7 @@ import HttpManager from '@/helpers/HttpManager'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/login',
@@ -29,19 +29,22 @@ export default new Router({
       path: '*',
       component: PageNotFound
     }
-  ],
-  beforeEach (to, from, next) {
-    console.log(to)
-
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      const token = StorageManager.get('token')
-      if (!token) {
-        next({ name: 'login' })
-        return
-      }
-
-      HttpManager.setAuthHeader(token)
-      next()
-    }
-  }
+  ]
 })
+
+router.beforeEach((to, from, next) => {
+  const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (!routeRequiresAuth) {
+    next()
+  }
+
+  const token = StorageManager.get('token')
+  if (!token) {
+    next({ name: 'login' })
+  }
+
+  HttpManager.setAuthHeader(token)
+  next()
+})
+
+export default router

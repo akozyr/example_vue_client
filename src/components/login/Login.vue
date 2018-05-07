@@ -9,11 +9,27 @@
     >
       {{ message }}
     </b-alert>
-    <form>
-      <input type="text" name="nickname" placeholder="Nickname" autofocus required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="submit" name="login" class="login login-submit" value="Login">
-    </form>
+    <b-form @submit.prevent="onSubmit()">
+      <b-form-input
+        v-model="credentials.email"
+        type="email"
+        placeholder="Email"
+        required
+      >
+      </b-form-input>
+      <b-form-input
+        v-model="credentials.password"
+        type="password"
+        placeholder="Password"
+        required
+      >
+      </b-form-input>
+      <b-button
+        type="submit"
+        variant="primary"
+        class="login login-submit"
+      >Login</b-button>
+    </b-form>
   </div>
 </template>
 
