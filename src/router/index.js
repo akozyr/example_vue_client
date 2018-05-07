@@ -35,11 +35,13 @@ router.beforeEach((to, from, next) => {
   const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (!routeRequiresAuth) {
     next()
+    return
   }
 
   const token = StorageManager.get('token')
   if (!token) {
     next({ name: 'login' })
+    return
   }
 
   HttpManager.setAuthHeader(token)
