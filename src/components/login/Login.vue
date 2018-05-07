@@ -5,7 +5,7 @@
       variant="danger"
       dismissible
       :show="showDismissibleAlert"
-      @dismissed="showDismissibleAlert = false"
+      @dismissed="onDismissAlert()"
     >
       {{ message }}
     </b-alert>
@@ -13,6 +13,7 @@
       <b-form-input
         v-model="credentials.email"
         type="email"
+        ref="email"
         placeholder="Email"
         required
       >

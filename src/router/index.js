@@ -6,6 +6,7 @@ import PdfRoutes from './pdf'
 import PageNotFound from '@/components/errors/PageNotFound'
 import StorageManager from '@/helpers/StorageManager'
 import HttpManager from '@/helpers/HttpManager'
+import { STANDARD_ROUTE_META } from '@/constants/main'
 
 Vue.use(Router)
 
@@ -20,10 +21,8 @@ const router = new Router({
       path: '/pdf',
       name: 'pdf-root',
       component: PdfRoot,
-      children: PdfRoutes,
-      meta: {
-        requiresAuth: true
-      }
+      meta: STANDARD_ROUTE_META,
+      children: PdfRoutes
     },
     {
       path: '*',

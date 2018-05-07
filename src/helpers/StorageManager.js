@@ -1,11 +1,11 @@
 export default {
   get (key) {
-    return localStorage.getItem(key)
+    return sessionStorage.getItem(key)
   },
   save (key, value) {
-    localStorage.setItem(key, value)
+    sessionStorage.setItem(key, value)
   },
   remove (key) {
-    localStorage.removeItem(key)
+    sessionStorage.removeItem(key)
   }
 }
