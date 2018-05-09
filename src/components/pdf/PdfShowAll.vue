@@ -2,14 +2,17 @@
   <div>
     <b-table
       v-if="items.length"
-      :items="tableHeaderItems"
-      :fields="fields"
+      :items="items"
+      :fields="tableHeaderItems"
       hover
     >
+      <template slot="type" slot-scope="data">
+        {{ getTypeTitle(data.item.type) }}
+      </template>
       <template slot="actions" slot-scope="data">
         <b-link :href="data.item.link" target="_blank">Show</b-link>
-        <b-link :to="{ name: 'pdf-show', params: { id: data.index } }">Edit</b-link>
-        <b-link @click="onDelete(data.index)">Delete</b-link>
+        <b-link :to="{ name: 'pdf-show', params: { id: data.item.id } }">Edit</b-link>
+        <b-link @click="onDelete(data.item.id)">Delete</b-link>
       </template>
     </b-table>
     <div v-else>

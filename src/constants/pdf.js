@@ -1,7 +1,7 @@
 export const PDF_TABLE_FIELDS = [
   'filename',
   'type',
-  'text',
+  { key: 'custom_text', label: 'Text' },
   'created_at',
   'updated_at',
   'actions'
@@ -21,3 +21,15 @@ export const PDF_FORM_NEW_ITEMS = [
     type: 'Advanced'
   }
 ]
+
+export const PDF_TYPES = {
+  SHORT: 0,
+  FULL: 1,
+  ADVANCED: 2
+}
+
+export const PDF_TYPE_TITLES = {
+  [PDF_TYPES.SHORT]: 'Short',
+  [PDF_TYPES.FULL]: 'Full',
+  [PDF_TYPES.ADVANCED]: 'Advanced'
+}
