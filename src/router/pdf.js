@@ -1,15 +1,15 @@
-import PdfShowAll from '@/components/pdf/PdfShowAll.vue'
-import PdfShow from '@/components/pdf/PdfShow.vue'
+import PdfMain from '@/components/pdf/PdfMain.vue'
+import PdfEdit from '@/components/pdf/PdfEdit.vue'
 
 export default [
   {
-    path: 'all',
-    name: 'pdf-all',
-    component: PdfShowAll
+    path: 'main',
+    name: 'pdf-main',
+    component: PdfMain
   },
   {
-    path: 'show/:id',
-    name: 'pdf-show',
-    component: PdfShow
+    path: 'edit/:id',
+    name: 'pdf-edit',
+    component: PdfEdit
   }
 ]

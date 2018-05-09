@@ -1,7 +1,11 @@
 export const PDF_TABLE_FIELDS = [
   'filename',
   'type',
-  { key: 'custom_text', label: 'Text' },
+  {
+    key: 'custom_text',
+    label: 'Text',
+    class: 'pdf-text'
+  },
   'created_at',
   'updated_at',
   'actions'

@@ -11,7 +11,7 @@
       </template>
       <template slot="actions" slot-scope="data">
         <b-link :href="data.item.link" target="_blank">Show</b-link>
-        <b-link :to="{ name: 'pdf-show', params: { id: data.item.id } }">Edit</b-link>
+        <b-link :to="{ name: 'pdf-edit', params: { id: data.item.id } }">Edit</b-link>
         <b-link @click="onDelete(data.item.id)">Delete</b-link>
       </template>
     </b-table>
@@ -46,4 +46,6 @@
   </div>
 </template>
 
-<script src="./PdfShowAll.js"></script>
+<script src="./PdfMain.js"></script>
+
+<style src="@/assets/css/pdf/pdf-main.css"></style>
