@@ -1,5 +1,4 @@
-import HttpManager from '@/helpers/HttpManager'
-import StorageManager from '@/helpers/StorageManager'
+import AuthService from '@/services/auth/AuthService'
 
 export default {
   data () {
@@ -12,8 +11,7 @@ export default {
     }
   },
   created () {
-    const token = StorageManager.get('token')
-    if (token) {
+    if (AuthService.isAuthenticated()) {
       this.$router.push({ name: 'pdf-root' })
     }
   },
@@ -27,11 +25,10 @@ export default {
   },
   methods: {
     onSubmit () {
-      HttpManager.post('auth/login', this.credentials).then(response => {
-          StorageManager.save('token', response.data.data.access_token)
-          this.$router.push({ name: 'pdf-root' })
+      AuthService.attempt(this.credentials).then(response => {
+        this.$router.push({ name: 'pdf-root' })
       }).catch(error => {
-        this.message = error.response.data.message
+        this.message = error.data.message
       })
     },
     onDismissAlert () {

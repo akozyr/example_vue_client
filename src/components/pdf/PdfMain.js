@@ -42,7 +42,7 @@ export default {
           this.items = response.data.data
         })
       }).catch(error => {
-        Alerter.alert(error.response.message)
+        Alerter.alert(error.data.message)
       })
     },
     onReset () {

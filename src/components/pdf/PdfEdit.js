@@ -18,7 +18,7 @@ export default {
     HttpManager.get(`pdfs/${this.pdfId}`).then(response => {
       this.pdfData.text = response.data.data.custom_text
     }).catch(error => {
-      Alerter.alert(error.response.data.message)
+      Alerter.alert(error.data.message)
 
       this.$router.push({ name: 'pdf-main' })
     })
