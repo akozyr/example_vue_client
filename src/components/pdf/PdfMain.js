@@ -1,5 +1,6 @@
 import * as PdfConstants from '@/constants/pdf'
 import HttpManager from '@/helpers/HttpManager'
+import ErrorHandler from '@/helpers/error-handlers/ErrorHandler'
 import Alerter from '@/helpers/Alerter'
 
 export default {
@@ -18,6 +19,8 @@ export default {
   created () {
     HttpManager.get('pdfs').then(response => {
       this.items = response.data.data
+    }).catch(error => {
+      ErrorHandler.catch(error)
     })
   },
   methods: {
@@ -29,7 +32,11 @@ export default {
 
           HttpManager.get('pdfs').then(response => {
             this.items = response.data.data
+          }).catch(error => {
+            ErrorHandler.catch(error)
           })
+        }).catch(error => {
+          ErrorHandler.catch(error)
         })
       }
     },
@@ -40,6 +47,8 @@ export default {
 
         HttpManager.get('pdfs').then(response => {
           this.items = response.data.data
+        }).catch(error => {
+          ErrorHandler.catch(error)
         })
       }).catch(error => {
         Alerter.alert(error.data.message)

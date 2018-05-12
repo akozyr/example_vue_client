@@ -1,4 +1,5 @@
 import HttpManager from '@/helpers/HttpManager'
+import ErrorHandler from '@/helpers/error-handlers/ErrorHandler'
 import Alerter from '@/helpers/Alerter'
 
 export default {
@@ -29,6 +30,8 @@ export default {
         Alerter.alert(response.data.message)
 
         this.$router.push({ name: 'pdf-main' })
+      }).catch(error => {
+        ErrorHandler.catch(error)
       })
     },
     onReset () {

@@ -14,15 +14,11 @@ export default {
 
         return config
       },
-      error => {
-        return Promise.reject(error)
-      }
+      error => Promise.reject(error)
     )
 
     axios.interceptors.response.use(
-      response => {
-        return response
-      },
+      response => response,
       error => {
         if (error.response.status === HTTP_UNAUTHORIZED && AuthService.isAuthenticated()) {
           AuthService.processUnauthorizedUser()

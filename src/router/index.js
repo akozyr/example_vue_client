@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routes'
-import middleware from './middleware'
+import middleware from './middlewares/middleware'
 
 Vue.use(Router)
 
