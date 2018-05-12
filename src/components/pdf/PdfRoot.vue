@@ -10,9 +10,9 @@
             <b-nav-item-dropdown right>
               <!-- Using button-content slot -->
               <template slot="button-content">
-                <em>User</em>
+                <em>{{ fullname }}</em>
               </template>
-              <b-dropdown-item href="#">Signout</b-dropdown-item>
+              <b-dropdown-item href="#" @click="onLogout()">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>

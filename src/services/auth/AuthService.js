@@ -4,7 +4,7 @@ import HttpManager from '@/helpers/HttpManager'
 
 export default {
   processUnauthorizedUser () {
-    const tokenExpiredMessage = 'Token is expired. Please log in again.'
+    const tokenExpiredMessage = 'Session is expired. Please log in again.'
     Alerter.alert(tokenExpiredMessage)
 
     StorageManager.remove('token')
@@ -23,5 +23,15 @@ export default {
   },
   getUserToken () {
     return StorageManager.get('token')
+  },
+  user () {
+    return HttpManager.get('user-info')
+  },
+  logout () {
+    return HttpManager.post('auth/logout').then(response => {
+      Alerter.alert(response.data.message)
+
+      StorageManager.remove('token')
+    })
   }
 }
