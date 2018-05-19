@@ -20,7 +20,7 @@ export default {
     axios.interceptors.response.use(
       response => response,
       error => {
-        if (error.response.status === HTTP_UNAUTHORIZED && AuthService.isAuthenticated()) {
+        if (error.response.status === HTTP_UNAUTHORIZED && !AuthService.isAuthenticated()) {
           AuthService.processUnauthorizedUser()
           router.push({ name: 'login' })
         }

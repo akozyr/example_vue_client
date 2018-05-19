@@ -2,6 +2,7 @@ import * as PdfConstants from '@/constants/pdf'
 import HttpManager from '@/helpers/HttpManager'
 import ErrorHandler from '@/helpers/error-handlers/ErrorHandler'
 import Alerter from '@/helpers/Alerter'
+import endpoints from '@/endpoints'
 
 export default {
   data () {
@@ -17,7 +18,7 @@ export default {
     }
   },
   created () {
-    HttpManager.get('pdfs').then(response => {
+    HttpManager.get(endpoints.pdfs.all()).then(response => {
       this.items = response.data.data
     }).catch(error => {
       ErrorHandler.catch(error)
@@ -27,10 +28,10 @@ export default {
     onDelete (id) {
       const confirmationMessage = 'Are you sure you delete the pdf?'
       if (Alerter.isConfirmed(confirmationMessage)) {
-        HttpManager.delete(`pdfs/${id}`).then(response => {
+        HttpManager.delete(endpoints.pdfs.delete(id)).then(response => {
           Alerter.alert(response.data.message)
 
-          HttpManager.get('pdfs').then(response => {
+          HttpManager.get(endpoints.pdfs.all()).then(response => {
             this.items = response.data.data
           }).catch(error => {
             ErrorHandler.catch(error)
@@ -41,11 +42,11 @@ export default {
       }
     },
     onSubmit () {
-      HttpManager.post('pdfs/all', this.pdfData).then(response => {
+      HttpManager.post(endpoints.pdfs.store(), this.pdfData).then(response => {
         this.clearPdfData()
         Alerter.alert(response.data.message)
 
-        HttpManager.get('pdfs').then(response => {
+        HttpManager.get(endpoints.pdfs.all()).then(response => {
           this.items = response.data.data
         }).catch(error => {
           ErrorHandler.catch(error)

@@ -1,6 +1,7 @@
 import HttpManager from '@/helpers/HttpManager'
 import ErrorHandler from '@/helpers/error-handlers/ErrorHandler'
 import Alerter from '@/helpers/Alerter'
+import endpoints from '@/endpoints'
 
 export default {
   data () {
@@ -16,7 +17,7 @@ export default {
       this.$route.push({ name: 'pdf-main' })
     }
 
-    HttpManager.get(`pdfs/${this.pdfId}`).then(response => {
+    HttpManager.get(endpoints.pdfs.show(this.pdfId)).then(response => {
       this.pdfData.text = response.data.data.custom_text
     }).catch(error => {
       Alerter.alert(error.data.message)
@@ -26,7 +27,10 @@ export default {
   },
   methods: {
     onSubmit () {
-      HttpManager.put(`pdfs/${this.pdfId}`, this.pdfData).then(response => {
+      HttpManager.put(
+        endpoints.pdfs.update(this.pdfId),
+        this.pdfData
+      ).then(response => {
         Alerter.alert(response.data.message)
 
         this.$router.push({ name: 'pdf-main' })

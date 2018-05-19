@@ -8,7 +8,7 @@ export default function CheckIfAuthenticated (router) {
       return
     }
 
-    if (!AuthService.isAuthenticated) {
+    if (!AuthService.isAuthenticated()) {
       next({ name: 'login' })
       return
     }

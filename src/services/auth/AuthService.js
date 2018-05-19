@@ -1,6 +1,7 @@
 import Alerter from '@/helpers/Alerter'
 import StorageManager from '@/helpers/StorageManager'
 import HttpManager from '@/helpers/HttpManager'
+import endpoints from '@/endpoints'
 
 export default {
   processUnauthorizedUser () {
@@ -15,7 +16,10 @@ export default {
     return !!token
   },
   attempt (credentials) {
-    const promise = HttpManager.post('auth/login', credentials).then(response => {
+    const promise = HttpManager.post(
+      endpoints.auth.login(),
+      credentials
+    ).then(response => {
       StorageManager.save('token', response.data.data.access_token)
     })
 
@@ -25,10 +29,10 @@ export default {
     return StorageManager.get('token')
   },
   user () {
-    return HttpManager.get('user-info')
+    return HttpManager.get(endpoints.auth.userInfo())
   },
   logout () {
-    return HttpManager.post('auth/logout').then(response => {
+    return HttpManager.post(endpoints.auth.logout()).then(response => {
       Alerter.alert(response.data.message)
 
       StorageManager.remove('token')
