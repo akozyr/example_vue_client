@@ -3,7 +3,7 @@ This repository is an example of Vue.js SPA, API client for [Laravel RESTful API
 The app includes such pages:
  - Login
  - PDF Main (all PDFs list, show/delete a generated PDF of the certain type)
- - PDF Edit (edit PDF data, regenerate PDF and save it to DB)
+ - PDF Edit (edit PDF data, regenerate PDF and save necessary PDF data to DB)
 
 ### Installation
 The app requires Node.js 6.0+ and NPM 3.0+
